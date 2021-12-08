@@ -31,12 +31,12 @@
     // Load the Orbitcontroller
     var controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-    hlight = new THREE.AmbientLight (0x404040,100);
+    hlight = new THREE.AmbientLight (0x404040,5);
     scene.add(hlight);
 
     // glTf 2.0 Loader
     var loader = new THREE.GLTFLoader();
-    loader.load( 'gltf_model/scene.gltf', function ( gltf ) {
+    loader.load( 'gltf_model/Kodak_test_1.gltf', function ( gltf ) {
         var object = gltf.scene;
         gltf.scene.scale.set( 2, 2, 2 );
         gltf.scene.position.x = 0;				    //Position (x = right+ left-)
