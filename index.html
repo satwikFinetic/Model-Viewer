@@ -1,63 +1,113 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>____________glTF2_Loader_________</title>
+    <title>____________Model Viewer_________</title>
     <style>
-        body { margin: 0; }
-        canvas { width: 100%; height: 100% }
+        body {
+            margin: 0;
+        }
+        canvas {
+            width: 100%;
+            height: 100%
+        }
+        div {
+            position: absolute;
+            top: 0;
+        }
     </style>
 </head>
+
 <body>
-<script src="three.js"></script>
-<script src="OrbitControls.js"></script>
-<script src="GLTFLoader.js"></script>
+    <script src="three.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="GLTFLoader.js"></script>
+    <script src="Stats.js"></script>
 
-<script>
+    <script>
+        // Load 3D Scene
+        var scene = new THREE.Scene();
 
-    // Load 3D Scene
-    var scene = new THREE.Scene();
+        // Load Camera Perspektive
+        var camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 1, 20000);
+        camera.position.set(-1, 5, 20);
 
-    // Load Camera Perspektive
-    var camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 1, 20000 );
-    camera.position.set( 1, 1, 20 );
+        // Load a Renderer
+        var renderer = new THREE.WebGLRenderer({
+            alpha: false
+        });
+        renderer.setClearColor(0xC5C5C3);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
 
-    // Load a Renderer
-    var renderer = new THREE.WebGLRenderer({ alpha: false });
-    renderer.setClearColor( 0xC5C5C3 );
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+        // raycaster and pointer objects
+        const raycaster = new THREE.Raycaster();
+        const pointer = new THREE.Vector2();
 
-    // Load the Orbitcontroller
-    var controls = new THREE.OrbitControls( camera, renderer.domElement );
+        // Stats object to display frame rate
+        var stats = new Stats();
+        document.body.appendChild(stats.domElement);
 
-    hlight = new THREE.AmbientLight (0x404040,5);
-    scene.add(hlight);
 
-    // glTf 2.0 Loader
-    var loader = new THREE.GLTFLoader();
-    loader.load( 'gltf_model/Kodak_test_1.gltf', function ( gltf ) {
-        var object = gltf.scene;
-        gltf.scene.scale.set( 2, 2, 2 );
-        gltf.scene.position.x = 0;				    //Position (x = right+ left-)
-        gltf.scene.position.y = 0;				    //Position (y = up+, down-)
-        gltf.scene.position.z = 0;				    //Position (z = front +, back-)
+        // Load the Orbitcontroller
+        var controls = new THREE.OrbitControls(camera, renderer.domElement);
+            // restrict user from free navigation
+            controls.minDistance = 5;
+            controls.maxDistance = 15;
+            controls.minPolarAngle = 0;
+            controls.maxPolarAngle = Math.PI * 0.5;
+            controls.enablePan = false;
+            controls.update();
 
-        scene.add( gltf.scene );
-    });
+        // simple ambient light
+        hlight = new THREE.AmbientLight(0x404040, 5);
+        scene.add(hlight);
 
-    function animate() {
+        // glTf 2.0 Loader
+        var loader = new THREE.GLTFLoader();
+        var gltfObject;
+        loader.load('gltf_model/Kodak_test_1.gltf', function (gltf) {
+            gltfObject = gltf.scene;
+            gltf.scene.scale.set(2, 2, 2);
+            gltf.scene.position.x = 0; //Position (x = right+ left-)
+            gltf.scene.position.y = 0; //Position (y = up+, down-)
+            gltf.scene.position.z = 0; //Position (z = front +, back-)
+
+            scene.add(gltf.scene);
+        });
+        
+        function animate() {
+            stats.update();
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render() {
+            renderer.render(scene, camera);
+        }
         render();
-        requestAnimationFrame( animate );
-    }
+        animate();
 
-    function render() {
-        renderer.render( scene, camera );
-    }
+        // pointer click event to teleport
+        document.addEventListener('pointerup', onPointerclick);
 
-    render();
-    animate();
+        function onPointerclick(event) {
 
-</script>
+            pointer.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+            pointer.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+            raycaster.setFromCamera(pointer, camera);
+
+            // See if the ray from the camera into the world hits one of our meshes
+            const intersects = raycaster.intersectObject(gltfObject, true);
+
+            camera.position.x = intersects[0].point.x;
+            camera.position.y = intersects[0].point.y;
+            camera.position.z = intersects[0].point.z;
+
+            console.log(intersects.position);
+        }
+    </script>
 </body>
+
 </html>
