@@ -1,0 +1,445 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "babylon.js glTF exporter for 3dsmax 2019 v20211112.1"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0,
+        1
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "translation": [
+        -6.631702,
+        0.227054045,
+        11.1301174
+      ],
+      "scale": [
+        39.37008,
+        39.37008,
+        39.37008
+      ],
+      "name": "HUD anim005"
+    },
+    {
+      "mesh": 1,
+      "translation": [
+        -6.631702,
+        0.227054015,
+        11.1301174
+      ],
+      "rotation": [
+        0,
+        0.382683426,
+        0,
+        0.923879564
+      ],
+      "scale": [
+        39.3700752,
+        39.3700752,
+        39.3700752
+      ],
+      "name": "HUD anim006"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 1,
+            "NORMAL": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 0,
+          "material": 0
+        }
+      ],
+      "name": "HUD anim005"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 5,
+            "NORMAL": 6,
+            "TEXCOORD_0": 7
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ],
+      "name": "HUD anim006"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5123,
+      "count": 648,
+      "type": "SCALAR",
+      "name": "accessorIndices"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 144,
+      "max": [
+        0.03970469,
+        0.00759346643,
+        0.0397046842
+      ],
+      "min": [
+        -0.03970468,
+        0.0007969928,
+        -0.0397046879
+      ],
+      "type": "VEC3",
+      "name": "accessorPositions"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1728,
+      "componentType": 5126,
+      "count": 144,
+      "type": "VEC3",
+      "name": "accessorNormals"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 144,
+      "type": "VEC2",
+      "name": "accessorUVs"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1296,
+      "componentType": 5123,
+      "count": 216,
+      "type": "SCALAR",
+      "name": "accessorIndices"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 3456,
+      "componentType": 5126,
+      "count": 72,
+      "max": [
+        0.0202430636,
+        0.006230677,
+        0.02024306
+      ],
+      "min": [
+        -0.0202430617,
+        0.005916683,
+        -0.0202430673
+      ],
+      "type": "VEC3",
+      "name": "accessorPositions"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 4320,
+      "componentType": 5126,
+      "count": 72,
+      "type": "VEC3",
+      "name": "accessorNormals"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1152,
+      "componentType": 5126,
+      "count": 72,
+      "type": "VEC2",
+      "name": "accessorUVs"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 149,
+      "max": [
+        9.375
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR",
+      "name": "accessorAnimationInput"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 149,
+      "type": "VEC3",
+      "name": "accessorAnimationPositions"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 596,
+      "componentType": 5126,
+      "count": 182,
+      "max": [
+        9.375
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR",
+      "name": "accessorAnimationInput"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 182,
+      "type": "VEC4",
+      "name": "accessorAnimationRotations"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 1324,
+      "componentType": 5126,
+      "count": 128,
+      "max": [
+        9.375
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR",
+      "name": "accessorAnimationInput"
+    },
+    {
+      "bufferView": 4,
+      "byteOffset": 1788,
+      "componentType": 5126,
+      "count": 128,
+      "type": "VEC3",
+      "name": "accessorAnimationScales"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 1836,
+      "componentType": 5126,
+      "count": 150,
+      "max": [
+        9.375
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR",
+      "name": "accessorAnimationInput"
+    },
+    {
+      "bufferView": 4,
+      "byteOffset": 3324,
+      "componentType": 5126,
+      "count": 150,
+      "type": "VEC3",
+      "name": "accessorAnimationPositions"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 2436,
+      "componentType": 5126,
+      "count": 182,
+      "max": [
+        9.375
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR",
+      "name": "accessorAnimationInput"
+    },
+    {
+      "bufferView": 5,
+      "byteOffset": 2912,
+      "componentType": 5126,
+      "count": 182,
+      "type": "VEC4",
+      "name": "accessorAnimationRotations"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 3164,
+      "componentType": 5126,
+      "count": 129,
+      "max": [
+        9.375
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR",
+      "name": "accessorAnimationInput"
+    },
+    {
+      "bufferView": 4,
+      "byteOffset": 5124,
+      "componentType": 5126,
+      "count": 129,
+      "type": "VEC3",
+      "name": "accessorAnimationScales"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 1728,
+      "name": "bufferViewScalar"
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1728,
+      "byteLength": 5184,
+      "byteStride": 12,
+      "name": "bufferViewFloatVec3"
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 6912,
+      "byteLength": 1728,
+      "byteStride": 8,
+      "name": "bufferViewFloatVec2"
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 8640,
+      "byteLength": 3680,
+      "name": "bufferViewAnimationFloatScalar"
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 12320,
+      "byteLength": 6672,
+      "name": "bufferViewAnimationFloatVec3"
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 18992,
+      "byteLength": 5824,
+      "name": "bufferViewAnimationFloatVec4"
+    }
+  ],
+  "buffers": [
+    {
+      "uri": "Products-v2HUD_data.bin",
+      "byteLength": 24816
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.249303535
+      },
+      "alphaMode": "BLEND",
+      "name": "HUDring"
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0,
+      "name": "HUD_1a.png"
+    }
+  ],
+  "images": [
+    {
+      "uri": "Products-v2HUD_img0.png"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 1,
+            "path": "translation"
+          }
+        },
+        {
+          "sampler": 1,
+          "target": {
+            "node": 1,
+            "path": "rotation"
+          }
+        },
+        {
+          "sampler": 2,
+          "target": {
+            "node": 1,
+            "path": "scale"
+          }
+        },
+        {
+          "sampler": 3,
+          "target": {
+            "node": 0,
+            "path": "translation"
+          }
+        },
+        {
+          "sampler": 4,
+          "target": {
+            "node": 0,
+            "path": "rotation"
+          }
+        },
+        {
+          "sampler": 5,
+          "target": {
+            "node": 0,
+            "path": "scale"
+          }
+        }
+      ],
+      "samplers": [
+        {
+          "input": 8,
+          "output": 9
+        },
+        {
+          "input": 10,
+          "output": 11
+        },
+        {
+          "input": 12,
+          "output": 13
+        },
+        {
+          "input": 14,
+          "output": 15
+        },
+        {
+          "input": 16,
+          "output": 17
+        },
+        {
+          "input": 18,
+          "output": 19
+        }
+      ],
+      "name": "Anim-HUDs"
+    }
+  ]
+}
