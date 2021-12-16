@@ -1,8 +1,69 @@
 /**
- * Minified by jsDelivr using Terser v3.14.1.
- * Original file: /npm/pointerlockcontrols@1.0.2/PointerLockControls.js
- *
- * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ * @author mrdoob / http://mrdoob.com/
  */
- var THREE=require("three"),PointerLockControls=function(e,t){this.domElement=t||document.body,this.isLocked=!1;var o,n=this,i={type:"change"},r={type:"lock"},c={type:"unlock"},s=new THREE.Euler(0,0,0,"YXZ"),m=Math.PI/2;function u(t){if(!1!==n.isLocked){var o=t.movementX||t.mozMovementX||t.webkitMovementX||0,r=t.movementY||t.mozMovementY||t.webkitMovementY||0;s.setFromQuaternion(e.quaternion),s.y-=.002*o,s.x-=.002*r,s.x=Math.max(-m,Math.min(m,s.x)),e.quaternion.setFromEuler(s),n.dispatchEvent(i)}}function d(){document.pointerLockElement===n.domElement?(n.dispatchEvent(r),n.isLocked=!0):(n.dispatchEvent(c),n.isLocked=!1)}function E(){console.error("THREE.PointerLockControls: Unable to use Pointer Lock API")}this.connect=function(){document.addEventListener("mousemove",u,!1),document.addEventListener("pointerlockchange",d,!1),document.addEventListener("pointerlockerror",E,!1)},this.disconnect=function(){document.removeEventListener("mousemove",u,!1),document.removeEventListener("pointerlockchange",d,!1),document.removeEventListener("pointerlockerror",E,!1)},this.dispose=function(){this.disconnect()},this.getObject=function(){return e},this.getDirection=(o=new THREE.Vector3(0,0,-1),function(t){return t.copy(o).applyQuaternion(e.quaternion)}),this.lock=function(){this.domElement.requestPointerLock()},this.unlock=function(){document.exitPointerLock()},this.connect()};PointerLockControls.prototype=Object.create(THREE.EventDispatcher.prototype),PointerLockControls.prototype.constructor=PointerLockControls,module.exports=PointerLockControls;
- //# sourceMappingURL=/sm/d594f98fecbed7a15311937757b8a88d6ed2c443331f188cc521708f8b3ffeff.map
+
+var PointerLockControls = function ( camera ) {
+
+		var scope = this;
+
+		camera.rotation.set( 0, 0, 0 );
+
+		var pitchObject = new THREE.Object3D();
+		pitchObject.add( camera );
+
+		var yawObject = new THREE.Object3D();
+		yawObject.position.y = 10;
+		yawObject.add( pitchObject );
+
+		var PI_2 = Math.PI / 2;
+
+		var onMouseMove = function ( event ) {
+
+			if ( scope.enabled === false ) return;
+
+			var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+			var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+
+			yawObject.rotation.y -= movementX * 0.002;
+			pitchObject.rotation.x -= movementY * 0.002;
+
+			pitchObject.rotation.x = Math.max( - PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
+
+		};
+
+		this.dispose = function() {
+
+			document.removeEventListener( 'mousemove', onMouseMove, false );
+
+		};
+
+		document.addEventListener( 'mousemove', onMouseMove, false );
+
+		this.enabled = false;
+
+		this.getObject = function () {
+
+			return yawObject;
+
+		};
+
+		this.getDirection = function() {
+
+			// assumes the camera itself is not rotated
+
+			var direction = new THREE.Vector3( 0, 0, - 1 );
+			var rotation = new THREE.Euler( 0, 0, 0, "YXZ" );
+
+			return function( v ) {
+
+				rotation.set( pitchObject.rotation.x, yawObject.rotation.y, 0 );
+
+				v.copy( direction ).applyEuler( rotation );
+
+				return v;
+
+			};
+
+		}();
+
+	};
