@@ -272,10 +272,10 @@
                 document.body.style.cursor = "auto"
             }, 1000);
             document.body.style.cursor = "grabbing"
+// See if the ray from the camera into the world hits one of our meshes
+const intersects = raycaster.intersectObject(productsGltfObject, true);
+            if(intersects && intersects.length > 0 ) {
 
-
-            // See if the ray from the camera into the world hits one of our meshes
-            const intersects = raycaster.intersectObject(productsGltfObject, true);
             selecttionCoordinates = intersects[0].point;
             
             if (intersects[0].object.name in standing_position){
@@ -291,8 +291,11 @@
                 });
                 
             }
-        
             console.log(intersects[0].object.name);
+            }
+            
+        
+            
             
         }
 
@@ -358,19 +361,15 @@
             renderer.setSize( window.innerWidth, window.innerHeight );
 
         }
-        document.addEventListener( 'mousemove', onMouseMove );
+        
 
-        function onMouseMove( event ) {
-            pointer.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-            pointer.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
-            raycaster.setFromCamera(pointer, camera);
-            const intersects = raycaster.intersectObject(productsGltfObject, true);
-            if (intersects && intersects.length > 0 && intersects[0].object.name in standing_position){
-                const timeout = setTimeout(() => {
-                    document.body.style.cursor = "pointer"
-                }, 1000);
-            };
-            document.body.style.cursor = "default"
+        let mouseDownBool
+        let downListener = () => {
+            mouseDownBool = true
+        }
+        document.addEventListener('pointerdown', downListener)
+        let moveListener = () => {
+        if (mouseDownBool) {
             const _euler = new THREE.Euler( 0, 0, 0, 'YXZ' );
             const _PI_2 = Math.PI / 2;
             var minPolarAngle = 0; // radians
@@ -384,8 +383,16 @@
             _euler.x -= movementY * 0.002;
             _euler.x = Math.max( _PI_2 - maxPolarAngle, Math.min( _PI_2 - minPolarAngle, _euler.x ) );
             camera.quaternion.setFromEuler( _euler );
-
+        } else {
+            console.log('not moved')
         }
+        }
+        document.addEventListener('mousemove', moveListener)
+        let upListener = () => {
+            mouseDownBool = false
+        }
+        document.addEventListener('pointerup', upListener) 
+        
 
         
     </script>
