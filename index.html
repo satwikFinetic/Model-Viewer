@@ -104,41 +104,41 @@
 
         /*----------------------------------  Arrow Helper ------------------------------------*/
 
-        // ARROW HELPER
-        var yAxis = new THREE.ArrowHelper(
-            // first argument is the direction
-            new THREE.Vector3(0, 2, 0).normalize(),
-            // second argument is the origin
-            new THREE.Vector3(0, 0, 0),
-            // length
-            25,
-            // color
-            0xFFFF00);
-        scene.add(yAxis);
+        // // ARROW HELPER
+        // var yAxis = new THREE.ArrowHelper(
+        //     // first argument is the direction
+        //     new THREE.Vector3(0, 2, 0).normalize(),
+        //     // second argument is the origin
+        //     new THREE.Vector3(0, 0, 0),
+        //     // length
+        //     25,
+        //     // color
+        //     0xFFFF00);
+        // scene.add(yAxis);
 
-        // ARROW HELPER
-        var xAxis = new THREE.ArrowHelper(
-            // first argument is the direction
-            new THREE.Vector3(2, 0, 0).normalize(),
-            // second argument is the origin
-            new THREE.Vector3(0, 0, 0),
-            // length
-            25,
-            // color
-            0x00ff00);
-        scene.add(xAxis);
+        // // ARROW HELPER
+        // var xAxis = new THREE.ArrowHelper(
+        //     // first argument is the direction
+        //     new THREE.Vector3(2, 0, 0).normalize(),
+        //     // second argument is the origin
+        //     new THREE.Vector3(0, 0, 0),
+        //     // length
+        //     25,
+        //     // color
+        //     0x00ff00);
+        // scene.add(xAxis);
 
-        // ARROW HELPER
-        var zAxis = new THREE.ArrowHelper(
-            // first argument is the direction
-            new THREE.Vector3(0, 0, 2).normalize(),
-            // second argument is the origin
-            new THREE.Vector3(0, 0, 0),
-            // length
-            25,
-            // color
-            0x0000FF);
-        scene.add(zAxis);
+        // // ARROW HELPER
+        // var zAxis = new THREE.ArrowHelper(
+        //     // first argument is the direction
+        //     new THREE.Vector3(0, 0, 2).normalize(),
+        //     // second argument is the origin
+        //     new THREE.Vector3(0, 0, 0),
+        //     // length
+        //     25,
+        //     // color
+        //     0x0000FF);
+        // scene.add(zAxis);
 
 
         /*---------------------------------- Loading ------------------------------------*/
@@ -302,9 +302,9 @@ const intersects = raycaster.intersectObject(productsGltfObject, true);
 
         document.addEventListener("keydown", onDocumentKeyDown);
         function onDocumentKeyDown(event) {
-            if (event.keyCode == 65) {
+            if (event.keyCode == 65 || event.keyCode == 37) {
                 fetchProduct('PREV');
-            } else if (event.keyCode == 68) {
+            } else if (event.keyCode == 68 || event.keyCode == 39) {
                 fetchProduct('NEXT');
             } else if (event.keyCode == 27) {
                 resetPosition();
