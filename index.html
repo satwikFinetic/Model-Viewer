@@ -48,10 +48,10 @@
 
         // Load Camera Perspektive
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.x = -2
+        camera.position.x = -1
         camera.position.y = 6
         camera.position.z = 30
-        camera.lookAt(new THREE.Vector3(2,6,-20));
+        camera.lookAt(new THREE.Vector3(1,6,-20));
 
         // Load a Renderer
         var renderer = new THREE.WebGLRenderer({
@@ -292,7 +292,7 @@
         function resetPosition() {
             gsap.to(camera.position,{
                 duration:3,
-                x : -2,
+                x : -1,
                 y:  6,
                 z:  30,
                 onUpdate: function() {
