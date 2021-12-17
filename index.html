@@ -6,6 +6,7 @@
     <style>
         body {
             margin: 0;
+            
         }
 
         canvas {
@@ -37,6 +38,8 @@
     
     <script src="three.js"></script>
     <script src="GLTFLoader.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="FirstPersonControls.js"></script>
     <script src="Stats.js"></script>
     <script src="gsap.js"></script>
 
@@ -150,6 +153,17 @@
             console.log("Scene loaded");
         }
 
+        /*--------------------------------------orbit controller ---------------------------------*/
+        // Load the Orbitcontroller
+        var controls = new THREE.FirstPersonControls(camera, renderer.domElement);
+            // restrict user from free navigation
+            // controls.minDistance = 5;
+            // controls.maxDistance = 15;
+            // controls.minPolarAngle = 0;
+            // controls.maxPolarAngle = Math.PI * 0.5;
+            // controls.enablePan = false;
+            // controls.update();
+
 
         /*----------------------------------  Load GLTF models ------------------------------------*/
 
@@ -254,6 +268,11 @@
             pointer.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
             pointer.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
             raycaster.setFromCamera(pointer, camera);
+            const mytimeout = setTimeout(() => {
+                document.body.style.cursor = "auto"
+            }, 1000);
+            document.body.style.cursor = "grabbing"
+
 
             // See if the ray from the camera into the world hits one of our meshes
             const intersects = raycaster.intersectObject(productsGltfObject, true);
@@ -274,14 +293,15 @@
             }
         
             console.log(intersects[0].object.name);
+            
         }
 
 
         document.addEventListener("keydown", onDocumentKeyDown);
         function onDocumentKeyDown(event) {
-            if (event.keyCode == 37) {
+            if (event.keyCode == 65) {
                 fetchProduct('PREV');
-            } else if (event.keyCode == 39) {
+            } else if (event.keyCode == 68) {
                 fetchProduct('NEXT');
             } else if (event.keyCode == 27) {
                 resetPosition();
@@ -336,6 +356,34 @@
             camera.updateProjectionMatrix();
 
             renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
+        document.addEventListener( 'mousemove', onMouseMove );
+
+        function onMouseMove( event ) {
+            pointer.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+            pointer.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+            raycaster.setFromCamera(pointer, camera);
+            const intersects = raycaster.intersectObject(productsGltfObject, true);
+            if (intersects && intersects.length > 0 && intersects[0].object.name in standing_position){
+                const timeout = setTimeout(() => {
+                    document.body.style.cursor = "pointer"
+                }, 1000);
+            };
+            document.body.style.cursor = "default"
+            const _euler = new THREE.Euler( 0, 0, 0, 'YXZ' );
+            const _PI_2 = Math.PI / 2;
+            var minPolarAngle = 0; // radians
+			var maxPolarAngle = Math.PI ; // radians
+            const movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+            const movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+
+            _euler.setFromQuaternion( camera.quaternion );
+
+            _euler.y -= movementX * 0.002;
+            _euler.x -= movementY * 0.002;
+            _euler.x = Math.max( _PI_2 - maxPolarAngle, Math.min( _PI_2 - minPolarAngle, _euler.x ) );
+            camera.quaternion.setFromEuler( _euler );
 
         }
 
